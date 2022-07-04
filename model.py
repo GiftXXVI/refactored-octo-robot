@@ -68,8 +68,10 @@ class Permission(db.Model):
         'UserPermission', backref=db.backref('permissions', lazy=True))
     roles = db.relationship(
         'RolePermission', backref=db.backref('permissions', lazy=True))
+    resources = db.relationship(
+        'ResourcePermission', backref=db.backref('permissions', lazy=True))
 
-"""
+
 class ResourcePermission(db.Model):
     __tablename__ = "resourcepermissions"
     permission_id = db.Column(db.Integer(), db.ForeignKey(
@@ -82,4 +84,5 @@ class Resource(db.Model):
     __tablename__ = "resources"
     id = db.Column(db.Integer(), primary_key=True)
     url = db.Column(db.String(), unique=True, nullable=False)
-"""
+    permissions = db.relationship(
+        'ResourcePermission', backref=db.backref('resources', lazy=True))
